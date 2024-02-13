@@ -53,19 +53,68 @@
         <main class="flex-shrink-0">
             <div class="container p-5">
                 <h2 class="border-1 border-bottom border-dark mt-5">Title</h2>
-                <div class="row row-cols-1 row-cols-md-2">
-                    <div class="col-8">
+                <div class="row">
+                    <div class="col-md-8">
                         <pre class="line-numbers">
                             <code class="language-javascript">
-                                function hello(){
-                                    alert("Hello world");
+                                var startValue, endValue, table, resultHeader;
+
+                                function GetValues(){
+                                 startValue= document.getElementById("startNumber").value;
+                                 endValue= document.getElementById("endNumber").value;
+                                 table = document.getElementById("resultNumbers");
+                                 resultHeader = document.getElementById("resultheader");
+                                }
+                                
+                                function ValidateValues(){
+                                    GetValues();   
+                                    startValue = parseInt(startValue);
+                                    endValue = parseInt(endValue);
+                                
+                                    if(!Number.isInteger(startValue) || Number.isInteger(endValue))
+                                    {
+                                        alert("You must enter integers values only");
+                                        return false;
+                                    }
+                                
+                                    if(endValue < startValue)
+                                    {
+                                        alert("End value can't be lower than start value");
+                                        return false;
+                                    }
+                                
+                                    return true;
+                                }
+                                
+                                function DisplayNumbers(){
+                                    if(!ValidateValues())
+                                    {
+                                        return;
+                                    }
+                                    
+                                    resultHeader.innerText = "Results";
+                                    for(let i = startValue; i <= endValue; i++)
+                                    {
+                                        var newRow = document.createElement("tr");
+                                        var td = document.createElement("td");
+                                        if(i % 2 == 0)
+                                        {
+                                            td.classList.add("fw-bold");
+                                        }
+                                
+                                        td.textContent = i;
+                                        newRow.appendChild(td);
+                                        table.appendChild(newRow);
+                                    }
                                 }
                             </code>
                         </pre>
                     </div>
-                    <div class="col">
-                        <h6>Detalles</h6>
+
+                    <div class="col-md-2">
+                        <h6 class="pt-3">Detalles</h6>
                     </div>
+
                 </div>
             </div>
         </main>

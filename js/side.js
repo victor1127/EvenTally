@@ -1,23 +1,26 @@
-var startValue, endValue, resultNumbers, resultHeader;
+var startValue, endValue, table, resultHeader;
 
 function GetValues(){
  startValue= document.getElementById("startNumber").value;
  endValue= document.getElementById("endNumber").value;
- resultNumbers = document.getElementById("resultNumbers");
+ table = document.getElementById("resultNumbers");
  resultHeader = document.getElementById("resultheader");
 }
 
 function ValidateValues(){
-    GetValues();
-    if(endValue < startValue)
+    GetValues();   
+    startValue = parseInt(startValue);
+    endValue = parseInt(endValue);
+
+    if(!Number.isInteger(startValue) || Number.isInteger(endValue))
     {
-        alert("End value can't be lower than start value");
+        alert("You must enter integers values");
         return false;
     }
 
-    if(endValue == '' || startValue == '')
+    if(endValue < startValue)
     {
-        alert("Please, enter a start and end value.");
+        alert("End value can't be lower than start value");
         return false;
     }
 
@@ -42,6 +45,6 @@ function DisplayNumbers(){
 
         td.textContent = i;
         newRow.appendChild(td);
-        resultNumbers.appendChild(newRow);
+        table.appendChild(newRow);
     }
 }
